@@ -10,9 +10,16 @@ app.use(express.json())
 
 app.get("/handleNotification", (req, res) => {
     const datas = req.query
-    console.log(`Title: ${datas?.title}`)
-    console.log(`Text: ${datas?.key}`)
-    res.status(200).send("ok")
+    if(datas.secretKey != "R1IC7I58XKKXPPAJXAGMGDJ3KWUI7U") {
+        console.log("Secret key is not correct")
+        res.send("Secret key is not correct")
+    }
+    else {
+        console.log(`Title: ${datas?.title}`)
+        console.log(`Key: ${datas?.key}`)
+        console.log(`Amount: ${datas?.amount}`)
+        res.status(200).send("ok")
+    }
 })
 
 app.get("/", (req, res) => {
