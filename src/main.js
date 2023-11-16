@@ -11,8 +11,13 @@ app.use(express.json())
 app.get("/handleNotification", (req, res) => {
     const datas = req.query
     console.log(`Title: ${datas?.title}`)
-    console.log(`Text: ${datas?.text}`)
+    console.log(`Text: ${datas?.key}`)
     res.status(200).send("ok")
+})
+
+app.get("/", (req, res) => {
+    console.log("GET")
+    res.send("Welcome")
 })
 
 app.listen(PORT, () => {
