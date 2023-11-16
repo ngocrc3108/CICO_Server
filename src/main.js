@@ -5,19 +5,22 @@ import("node-fetch").then(({ default: fetch }) => fetch(...args))
 
 // constaints
 const PORT = 3000 | process.env.PORT
+const SECRET_KEY = "R1IC7I58XKKXPPAJXAGMGDJ3KWUI7U"
 
 app.use(express.json())
 
 app.get("/handleNotification", (req, res) => {
-    const datas = req.query
-    if(datas.secretKey != "R1IC7I58XKKXPPAJXAGMGDJ3KWUI7U") {
+    let {title, key, secretKey, amount} = req.query
+    amount = amount.replace(/,/g, '') // remove all comma
+
+    if(secretKey != SECRET_KEY) {
         console.log("Secret key is not correct")
         res.send("Secret key is not correct")
     }
     else {
-        console.log(`Title: ${datas?.title}`)
-        console.log(`Key: ${datas?.key}`)
-        console.log(`Amount: ${datas?.amount}`)
+        console.log(`Title: ${title}`)
+        console.log(`Key: ${key}`)
+        console.log(`Amount: ${amount}`)
         res.status(200).send("ok")
     }
 })
