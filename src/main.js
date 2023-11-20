@@ -29,7 +29,7 @@ app.get("/main", (req, res) => {
     console.log(req.query);
     if(req.query?.cmd == "read") {
         const name = "Nguyen Tien Ngoc";
-        res.send(`cmd=open&name=${name}\0`);
+        res.send(`cmd=open&name=${name}`);
     }
 })
 
