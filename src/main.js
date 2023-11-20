@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
-const fetch = (...args) =>
-import("node-fetch").then(({ default: fetch }) => fetch(...args))
+const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fetch(...args))
 
 // constaints
 const PORT = 3000 | process.env.PORT
@@ -22,6 +21,15 @@ app.get("/handleNotification", (req, res) => {
         console.log(`Key: ${key}`)
         console.log(`Amount: ${amount}`)
         res.status(200).send("ok")
+    }
+})
+
+app.get("/main", (req, res) => {
+    // co nguoi dung
+    console.log(req.query);
+    if(req.query?.cmd == "read") {
+        const name = "Nguyen Tien Ngoc";
+        res.send(`cmd=open&name=${name}\0`);
     }
 })
 
