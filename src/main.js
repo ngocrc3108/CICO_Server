@@ -97,7 +97,7 @@ app.get("/ESP32/read", (req, res) => {
                 fee: 3000,
                 location : "Gate 1"
             }
-            users[userIndex].history.push(info);
+            users[userIndex].history.unshift(info);
             users[userIndex].balance = users[userIndex].balance - info.fee
             res.send(info)
             console.log(info)  
@@ -129,7 +129,7 @@ app.get("/visit", (req, res) => {
             fee: 3000,
             location : "Gate 1"
         }
-        users[userIndex].history.push(info);
+        users[userIndex].history.unshift(info);
         users[userIndex].balance = users[userIndex].balance - info.fee
         res.send(info)
         console.log(info)
@@ -157,7 +157,7 @@ app.get("/user/topup", (req, res) => {
         capitalization : 'uppercase'
     })
     res.send(JSON.stringify({message : `Ngân hàng: BIDV\nSTK: 3149193588\nTên: Nguyen Tien Ngoc\nNội dung: ${string}`}))
-    topUpKey.push({
+    topUpKey.unshift({
         key : string,
         username : req.session.user.username,
         isOK : false
