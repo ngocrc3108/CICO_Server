@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Hệ thống quản lí vào ra</h1>
+    <div>
+        <p>
+            <span>Username:</span>
+            <span id="username"></span>
+        </p>
+        <p>
+            <span>balance:</span>
+            <span id="balance"></span>
+        </p>
+    </div>
+    <button type="button" onclick="topUp()">Top up</button>
+    <h2 style="text-align: center;">Lịch sử vào ra</h2>
+    <table class="HISTORY">
+        <th>Location</th>
+        <th>Fee</th>
+        <th>Time</th>
+        <tbody id="history">
+        </tbody>
+    </table>
+
+    <script>
+        fetch("http://localhost:3000/user/data").then(res => res.json())
+        .then(data => {
+            const {username, balance, history} = data
+            document.getElementById("username").innerHTML = username
+            document.getElementById("balance").innerHTML = balance
+            var temp = ""
+            history.forEach(element => {
+                    temp += `<tr>
+                                <td>${element.location}</td>
+                                <td>${element.fee}</td>
+                                <td>${element.time}</td>
+                            </tr>`
+            })
+            document.getElementById("history").innerHTML = temp
+        })
+
+        function topUp() {
+            fetch("http://localhost:3000/user/topup").then(res => res.json())
+            .then(data => {
+            const {message} = data
+            alert(message)
+        })
+        }
+    </script>
+    <style>
+        table, th, td {
+        border-collapse: collapse;
+        border:1px solid black;
+        }
+        .HISTORY {
+            width: 30%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</body>
+
+</html>
