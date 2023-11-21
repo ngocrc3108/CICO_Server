@@ -87,6 +87,24 @@ app.get("/handleNotification", (req, res) => {
     }
 })
 
+app.get("/ESP32/read", (req, res) => {
+    const {id} = req.query;
+    if(id !== undefined) {
+        const userIndex = users.findIndex((e) => e.id == id)
+        if(userIndex !== -1) {
+            const info = {
+                time: new Date(),
+                fee: 3000,
+                location : "Gate 1"
+            }
+            users[userIndex].history.push(info);
+            users[userIndex].balance = users[userIndex].balance - info.fee
+            res.send(info)
+            console.log(info)  
+        }
+    }
+})
+
 app.use((req, res, next) => {
     if(req.session.user === undefined)
         res.render("login")
