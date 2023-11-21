@@ -28,7 +28,7 @@
     </table>
 
     <script>
-        fetch("http://localhost:3000/user/data").then(res => res.json())
+        fetch("/user/data").then(res => res.json())
         .then(data => {
             const {username, balance, history} = data
             document.getElementById("username").innerHTML = username
@@ -45,7 +45,7 @@
         })
 
         function topUp() {
-            fetch("http://localhost:3000/user/topup").then(res => res.json())
+            fetch("/user/topup").then(res => res.json())
             .then(data => {
             const {message} = data
             alert(message)
