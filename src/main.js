@@ -70,8 +70,8 @@ app.get("/handleNotification", (req, res) => {
         console.log(`Key: ${key}`)
         console.log(`Amount: ${amount}`)
         const topUpIndext = topUpKey.findIndex((element) => element.key == key)
-        const username = topUpKey[topUpIndext].username
-        if(username !== undefined) {
+        if(topUpIndext !== -1) {
+            const username = topUpKey[topUpIndext].username
             const userIndex = users.findIndex((element) => element.username == username)
             if(userIndex !== -1) {
                 console.log("top up successfully")
