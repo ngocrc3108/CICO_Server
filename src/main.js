@@ -14,7 +14,7 @@ var users = [
     username : "Ngoc",
     password : "123456",
     id : "ABCD",
-    balance : 100000,
+    balance : 31000,
     history : [],
     sessionID : ""
     }
@@ -92,15 +92,22 @@ app.get("/ESP32/read", (req, res) => {
     if(id !== undefined) {
         const userIndex = users.findIndex((e) => e.id == id)
         if(userIndex !== -1) {
-            const info = {
-                time: new Date(),
-                fee: 3000,
-                location : "Gate 1"
+            if(users[userIndex].balance > 3000) {
+                const info = {
+                    time: new Date(),
+                    fee: 3000,
+                    location : "Gate 1"
+                }
+                users[userIndex].history.unshift(info);
+                users[userIndex].balance = users[userIndex].balance - info.fee
+                res.send(`cmd=open&name=${users[userIndex].username}`)
             }
-            users[userIndex].history.unshift(info);
-            users[userIndex].balance = users[userIndex].balance - info.fee
-            res.send(info)
-            console.log(info)  
+            else {
+                res.send("cmd=deny&reason=Insufficient funds")
+            } 
+        } else {
+            res.send("user not found")
+            console.log("user not found")
         }
     }
 })
