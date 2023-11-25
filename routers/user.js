@@ -27,14 +27,21 @@ userRoute.get("/topup", async (req, res) => {
     console.log(`user/topup: key = ${string}`)
 })
 
-//for testing only
-userRoute.get('/visit', (req, res) => {
-    const time = new Date();
-    req.user.history.unshift({time, location : "Gate 1", fee : 3000})
-    req.user.balance -= 3000
-    res.send("visited")
-    console.log("visited")
-    req.user.save()
+userRoute.get('/logout', async (req, res) => {
+    console.log(req.user)
+    req.user.seasionID = ""
+    await req.user.save()
+    res.redirect('/')
 })
+
+//for testing only
+// userRoute.get('/visit', (req, res) => {
+//     const time = new Date();
+//     req.user.history.unshift({time, location : "Gate 1", fee : 3000})
+//     req.user.balance -= 3000
+//     res.send("visited")
+//     console.log("visited")
+//     req.user.save()
+// })
 
 module.exports = userRoute

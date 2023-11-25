@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lí</title>
+    <title>Home</title>
 </head>
 <body>
     <h1 style="text-align: center;">Hệ thống quản lí vào ra</h1>
@@ -27,7 +27,9 @@
         <tbody id="history">
         </tbody>
     </table>
-
+    <form action="/user/logout" method="get">
+        <input type="submit" value="Logout">
+    </form>
     <script>
         fetch("/user/data").then(res => res.json())
         .then(data => {
