@@ -2,8 +2,19 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const userRoute = require('./routers/user')
+const {authenRoute, authenticate} = require('./routers/authenticate')
 const systemRoute = require('./routers/system')
-const bcrypt = require('bcrypt')
+const session = require('express-session')
+
+const SECRET_KEY = "R1IC7I58XKKXPPAJXAGMGDJ3KWUI7U"
+
+app.use(express.json())
+app.use(session({
+    secret : SECRET_KEY,
+    resave : false,
+    saveUninitialized : false,
+}))
+
 // constaints
 const PORT = 3000 | process.env.PORT
 
@@ -20,6 +31,12 @@ mongoose.connect(dbUrl)
 
 app.set('view engine', 'ejs')
 
-app.use('/user', userRoute)
 app.use('/system', systemRoute)
+app.use('/auth', authenRoute)
+app.use(authenticate) // require user login 
+app.use('/user', userRoute)
+
+app.get('/', (req, res) => {
+        res.render("home")
+    })
 

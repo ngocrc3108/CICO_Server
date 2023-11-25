@@ -1,11 +1,11 @@
 const {Router} = require('express')
 const Users = require('../models/users')
 const Topup = require('../models/topup')
-const router = Router()
+const systemRoute = Router()
 
 const systemSecretKey = "R1IC7I58XKKXPPAJXAGMGDJ3KWUI7U"
 
-router.use('/', (req, res, next) => {
+systemRoute.use('/', (req, res, next) => {
     const {secretKey} = req.query
     if(secretKey == systemSecretKey)
         next()
@@ -15,7 +15,7 @@ router.use('/', (req, res, next) => {
     }
 })
 
-router.get("/topup", async (req, res) => {
+systemRoute.get("/topup", async (req, res) => {
     let {key, amount} = req.query
     const topup = await Topup.findOne({key}) 
     if(topup == null) {
@@ -46,7 +46,7 @@ router.get("/topup", async (req, res) => {
     topup.save()
 })
 
-router.get("/ESP32/read", async (req, res) => {
+systemRoute.get("/ESP32/read", async (req, res) => {
     const {RFID} = req.query;
     const user = await Users.findById(RFID)
 
@@ -75,4 +75,4 @@ router.get("/ESP32/read", async (req, res) => {
     user.save()    
 })
 
-module.exports = router
+module.exports = systemRoute
