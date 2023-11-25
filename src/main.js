@@ -100,13 +100,13 @@ app.get("/ESP32/read", (req, res) => {
                 }
                 users[userIndex].history.unshift(info);
                 users[userIndex].balance = users[userIndex].balance - info.fee
-                res.send(`cmd=open&name=${users[userIndex].username}`)
+                res.send(`cmd=open&name=${users[userIndex].username}&fee=3000`)
             }
             else {
                 res.send("cmd=deny&reason=Insufficient funds")
             } 
         } else {
-            res.send("user not found")
+            res.send("cmd=deny&reason=User not found")
             console.log("user not found")
         }
     }
@@ -127,30 +127,21 @@ app.get("/", (req, res) => {
     res.render("home")
 })
 
-app.get("/visit", (req, res) => {
-    console.log(req.sessionID)
-    const userIndex = users.findIndex((element) => element.sessionID == req.sessionID)
-    if(userIndex !== -1) {
-        const info = {
-            time: new Date(),
-            fee: 3000,
-            location : "Gate 1"
-        }
-        users[userIndex].history.unshift(info);
-        users[userIndex].balance = users[userIndex].balance - info.fee
-        res.send(info)
-        console.log(info)
-    }
-})
-
-app.get("/main", (req, res) => {
-    // co nguoi dung
-    console.log(req.query);
-    if(req.query?.cmd == "read") {
-        const name = "Nguyen Tien Ngoc";
-        res.send(`cmd=open&name=${name}`);
-    }
-})
+// app.get("/visit", (req, res) => {
+//     console.log(req.sessionID)
+//     const userIndex = users.findIndex((element) => element.sessionID == req.sessionID)
+//     if(userIndex !== -1) {
+//         const info = {
+//             time: new Date(),
+//             fee: 3000,
+//             location : "Gate 1"
+//         }
+//         users[userIndex].history.unshift(info);
+//         users[userIndex].balance = users[userIndex].balance - info.fee
+//         res.send(info)
+//         console.log(info)
+//     }
+// })
 
 app.get("/user/data", (req, res) => {
     const user = users.find((element) => element.sessionID == req.sessionID)
