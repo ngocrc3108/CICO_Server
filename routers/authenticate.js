@@ -26,7 +26,7 @@ authenRoute.post("/signup", async (req, res) => {
     }
 
     const hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync())
-    const user = await Users.create({
+    await Users.create({
         username,
         password : hashedPassword
     })
@@ -49,7 +49,8 @@ authenRoute.post("/login", async (req, res) => {
             req.session.loggedIn = true;
             console.log("auth/login: success")
             user.seasionID = req.sessionID
-            user.save()
+            await user.save()
+            const {balance, formattedHistory} = user
             res.redirect('/')
         } catch (err) {
             console.log(err)

@@ -8,6 +8,10 @@ const session = require('express-session')
 
 const SECRET_KEY = "R1IC7I58XKKXPPAJXAGMGDJ3KWUI7U"
 
+// View engine setup
+app.set('views', './views')
+app.set("view engine", "pug")
+
 app.use(express.json())
 app.use(session({
     secret : SECRET_KEY,
@@ -23,13 +27,8 @@ const dbUrl = "mongodb+srv://ngocrc:ndJ45DHQS37SeUm9@atlascluster.hks9agm.mongod
 mongoose.connect(dbUrl)
     .then(() => {
             console.log("Connect to db")
-            app.listen(PORT, () => {
-                console.log(`Server is listening on port ${PORT}`)
-        })
     })
     .catch((err) => console.log(err))
-
-app.set('view engine', 'ejs')
 
 app.use('/system', systemRoute)
 app.use('/auth', authenRoute)
@@ -37,6 +36,14 @@ app.use(authenticate) // require user login
 app.use('/user', userRoute)
 
 app.get('/', (req, res) => {
-        res.render("home")
+    const {username, balance, formattedHistory} = req.user
+        res.render("home", {
+            username,
+            balance,
+            history : formattedHistory
+        })
     })
 
+app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`)
+})

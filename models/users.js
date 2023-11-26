@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const { DateTime } = require("luxon");
+
 const Schema  = mongoose.Schema
 const usersSchema = new Schema ({
     username : {
@@ -24,6 +26,14 @@ const usersSchema = new Schema ({
         default : []
     }
 }, {timestamps:true})
+
+usersSchema.virtual("formattedHistory").get(function () {
+    return this.history.map(value => {
+        value.time = DateTime.fromJSDate(value.time).toLocaleString(DateTime.DATETIME_SHORT_WITH_SECONDS)
+        return value
+    })
+  })
+
 const usersModel = mongoose.model('Users', usersSchema)
 
 module.exports = usersModel

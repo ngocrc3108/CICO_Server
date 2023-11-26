@@ -28,7 +28,7 @@ userRoute.get("/topup", async (req, res) => {
 })
 
 userRoute.get('/logout', async (req, res) => {
-    console.log(req.user)
+    console.log("user/logout")
     req.user.seasionID = ""
     await req.user.save()
     res.redirect('/')

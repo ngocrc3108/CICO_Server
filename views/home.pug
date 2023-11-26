@@ -1,0 +1,37 @@
+doctype html
+html
+    head
+    title Home
+    style 
+        include ./home_style.css
+    body
+        h1(style="text-align: center") Hệ thống quản lí vào ra
+        div
+            p Username: #{username}
+            p Balance: #{balance}
+        button(type="button", onclick="topUp()") Top up
+        div(style="float: right;")
+            form(action="/user/logout" method="get")
+                button(type='submit') Logout
+        table(class="HISTORY") 
+            tr 
+                th ID
+                th Location 
+                th Time
+                th Fee  
+            each value, index in history
+                tr
+                    th #{index + 1}
+                    th #{value.location}
+                    th #{value.time}
+                    th #{value.fee}
+
+    script(type='text/javascript').
+        console.log("Hello world")
+        function topUp() {
+            fetch("/user/topup").then(res => res.json())
+            .then(data => {
+            const {message} = data
+            alert(message)
+            })
+        }
