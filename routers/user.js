@@ -1,15 +1,15 @@
 const express = require('express')
-const userRoute = express.Router()
+const router = express.Router()
 const randomstring = require("randomstring")
 const Topup = require('../models/topup')
 
-userRoute.get("/data", (req, res) => {
+router.get("/data", (req, res) => {
     const {user} = req
     const {username, balance, history} = user
     res.json({username, balance, history})
 })
 
-userRoute.get("/topup", async (req, res) => {
+router.get("/topup", async (req, res) => {
     let string = ""
     do {
         string = "QLVR" + randomstring.generate({
@@ -27,7 +27,7 @@ userRoute.get("/topup", async (req, res) => {
     console.log(`user/topup: key = ${string}`)
 })
 
-userRoute.get('/logout', async (req, res) => {
+router.get('/logout', async (req, res) => {
     console.log("user/logout")
     req.user.seasionID = ""
     await req.user.save()
@@ -44,4 +44,4 @@ userRoute.get('/logout', async (req, res) => {
 //     req.user.save()
 // })
 
-module.exports = userRoute
+module.exports = router

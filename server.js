@@ -5,6 +5,7 @@ const userRoute = require('./routers/user')
 const {authenRoute, authenticate} = require('./routers/authenticate')
 const systemRoute = require('./routers/system')
 const session = require('express-session')
+require('dotenv').config()
 
 const SECRET_KEY = "R1IC7I58XKKXPPAJXAGMGDJ3KWUI7U"
 
@@ -24,7 +25,9 @@ const PORT = 3000 | process.env.PORT
 
 const dbUrl = "mongodb+srv://ngocrc:ndJ45DHQS37SeUm9@atlascluster.hks9agm.mongodb.net/Main?retryWrites=true&w=majority"
 
-mongoose.connect(dbUrl)
+console.log(process.env.DATABASE_URL)
+
+mongoose.connect(process.env.DATABASE_URL)
     .then(() => {
             console.log("Connect to db")
     })
