@@ -9,10 +9,10 @@ html
         div
             p Username: #{username}
             p Balance: #{balance}
-        button(type="button", onclick="topUp()") Top up
+        button(type="button", onclick="topUp()").btn Top up
         div(style="float: right;")
             form(action="/user/logout" method="get")
-                button(type='submit') Logout
+                button(type='submit').btn Logout
         table(class="HISTORY") 
             tr 
                 th ID

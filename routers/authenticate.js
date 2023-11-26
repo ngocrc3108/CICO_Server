@@ -3,37 +3,56 @@ const authenRoute = express.Router()
 const Users = require('../models/users')
 const bodyParser = require('body-parser')
 const bcrypt = require('bcrypt')
+const { body, validationResult } = require("express-validator")
 
-authenRoute.use(bodyParser.json({limit: '50mb'}))
 authenRoute.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 authenRoute.get('/signup', (req, res) => {
     res.render('signup')
 })
 
-authenRoute.post("/signup", async (req, res) => {
-    const {username, password} = req.body
-    if(username == undefined || password == undefined) {
-        console.log("auth/signup: username or password is empty")
-        res.send("Username or password is empty")
-        return
+authenRoute.post("/signup", [
+    body("password", "Password must be between 5 and 20 characters")
+    .trim()
+    .isLength({min : 5, max : 20})
+    .escape(),
+    body("username", "Username must be between 5 and 20 characters")
+    .trim()
+    .isLength({min : 5, max : 20})
+    .escape(),
+
+    async (req, res) => {
+        const errors = validationResult(req)
+
+        if(!errors.isEmpty()) {
+            res.render("signup", {
+                messages : errors.array()
+            })
+            return
+        }
+
+        const {username, password} = req.body
+    
+        if(await Users.findOne({username}) !== null) {
+            res.render("signup", {
+                messages : [{msg : "This username has already been used by another user!"}]
+            })
+            console.log("auth/signup: username has already been used by another user!")
+            return
+        }
+    
+        const hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync())
+        await Users.create({
+            username,
+            password : hashedPassword
+        })
+    
+        res.render("signup", {
+            messages : [{msg : "Register successfully, login now!"}]
+        })
+        console.log("auth/signup: success")
     }
-
-    if(await Users.findOne({username}) !== null) {
-        console.log("auth/signup: username has already used by another user!")
-        res.send("This username has already used by another user!")
-        return
-    }
-
-    const hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync())
-    await Users.create({
-        username,
-        password : hashedPassword
-    })
-
-    res.render('signup_success')
-    console.log("auth/signup: success")
-})
+])
 
 authenRoute.post("/login", async (req, res) => {
         const {username, password} = req.body
@@ -41,8 +60,10 @@ authenRoute.post("/login", async (req, res) => {
             const user = await Users.findOne({username})
 
             if(user == null || !bcrypt.compareSync(password, user.password)) {
+                res.render("login", {
+                    messages : [{msg : "Username or passwod is wrong"}]
+                })
                 console.log("auth/login: username or passwod is wrong")
-                res.status(500).send("username or passwod is wrong")
                 return                
             }
             
@@ -50,7 +71,6 @@ authenRoute.post("/login", async (req, res) => {
             console.log("auth/login: success")
             user.seasionID = req.sessionID
             await user.save()
-            const {balance, formattedHistory} = user
             res.redirect('/')
         } catch (err) {
             console.log(err)

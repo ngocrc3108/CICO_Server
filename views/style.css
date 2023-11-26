@@ -2,7 +2,6 @@
     padding: 0;
     margin:0;
     box-sizing: border-box;
-    font-family: tahoma;
   }
   .signin{
     margin-top: 7%;
@@ -15,11 +14,13 @@
     text-transform: uppercase;
   }
   .center h3{
-   
-    margin: 3% 0;
+    text-align: center;
+    margin: auto;
     color: red;
     font-size: 30px;
+    padding: 10px 10px;
   }
+
   div.label{
     margin-bottom: 1%;
     font-size: 20px;
@@ -43,7 +44,8 @@
     background: #4169E1;
     border: none;
     border-radius: 4px;
-    margin: 10px 0;
+    margin-left: auto;
+    margin-right: auto;
   }
   .signin p{
     text-align: center;
@@ -75,4 +77,8 @@
     padding: 7px;
     margin: 2% 0;
   }
+
+.messages {
+  color: red;
+}
  
