@@ -1,13 +1,12 @@
 const {Router} = require('express')
 const Users = require('../models/users')
 const Topup = require('../models/topup')
+require('dotenv').config()
 const systemRoute = Router()
-
-const systemSecretKey = "R1IC7I58XKKXPPAJXAGMGDJ3KWUI7U"
 
 systemRoute.use('/', (req, res, next) => {
     const {secretKey} = req.query
-    if(secretKey == systemSecretKey)
+    if(secretKey == process.env.SECRET_KEY)
         next()
     else {
         console.log("system: key is wrong")
