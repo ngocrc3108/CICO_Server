@@ -33,7 +33,7 @@ body {
 }
 
 ul {
-  padding-left: 0%;
+  padding-left: 5%;
   margin-top: 0%;
 }
 
@@ -105,7 +105,7 @@ p {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 41.66667%;
   flex: 0 0 41.66667%;
-  max-width: 41.66667%;
+  max-width: 32.66667%;
 }
 
 .login-wrap {
@@ -115,6 +115,7 @@ p {
   -webkit-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
   -moz-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
   box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24); }
+  pad
 
 .login-wrap h3 {
   font-weight: 600;
@@ -143,7 +144,7 @@ p {
 }
 
 .p-md-5 {
-  padding: 3rem !important;
+  padding: 3rem rem 1rem !important;
 }
 
 .d-flex {
