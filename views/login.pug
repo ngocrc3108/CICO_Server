@@ -1,11 +1,13 @@
 extends layout
-block loginform
-  h3.text-center.mb-4 Sign In
+block form
+  h3.text-center.mb-4 Login
   form.login-form(action='/auth/login' method="post")
     .form-group
-      input.form-control.rounded-left(name='username' type='text' placeholder='Username' required='')
+      input.form-control.rounded-left(name='username' type='text' placeholder='Username'
+      value=(username===undefine ? '' : username) required='')
     .form-group.d-flex
-      input.form-control.rounded-left(name='password' type='password' placeholder='Password' required='')
+      input.form-control.rounded-left(name='password' type='password' placeholder='Password'
+      value=(password===undefine ? '' : password) required='')
     .form-group
       button.form-control.btn.btn-primary.rounded.submit.px-3(type='submit') Login
     .form-group.d-md-flex

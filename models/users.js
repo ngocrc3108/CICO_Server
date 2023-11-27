@@ -3,6 +3,9 @@ const { DateTime } = require("luxon");
 
 const Schema  = mongoose.Schema
 const usersSchema = new Schema ({
+    fullName : {
+        type : String        
+    },
     username : {
         type : String
     },

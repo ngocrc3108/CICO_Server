@@ -3,16 +3,10 @@ const router = express.Router()
 const randomstring = require("randomstring")
 const Topup = require('../models/topup')
 
-router.get("/data", (req, res) => {
-    const {user} = req
-    const {username, balance, history} = user
-    res.json({username, balance, history})
-})
-
 router.get("/topup", async (req, res) => {
     let string = ""
     do {
-        string = "QLVR" + randomstring.generate({
+        string = "CICO" + randomstring.generate({
             length : 6,
             capitalization : 'uppercase'
         })
@@ -33,15 +27,5 @@ router.get('/logout', async (req, res) => {
     await req.user.save()
     res.redirect('/')
 })
-
-//for testing only
-// userRoute.get('/visit', (req, res) => {
-//     const time = new Date();
-//     req.user.history.unshift({time, location : "Gate 1", fee : 3000})
-//     req.user.balance -= 3000
-//     res.send("visited")
-//     console.log("visited")
-//     req.user.save()
-// })
 
 module.exports = router

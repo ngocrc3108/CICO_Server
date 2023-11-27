@@ -66,8 +66,8 @@ systemRoute.get("/ESP32/read", async (req, res) => {
         return
     }
 
-    res.send(`cmd=open&name=${user.username}&fee=${data.fee}`)
-    console.log(`system/ESP32/read: cmd=open&name=${user.username}&fee=${data.fee}`)
+    res.send(`cmd=open&name=${user.fullName}&fee=${data.fee}`)
+    console.log(`system/ESP32/read: cmd=open&name=${user.fullName}&fee=${data.fee}`)
 
     user.history.unshift(data)
     user.balance -= data.fee

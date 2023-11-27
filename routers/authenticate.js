@@ -12,6 +12,12 @@ authenRoute.get('/register', (req, res) => {
 })
 
 authenRoute.post("/register", [
+    body("fullName", "Name must be between 1 and 16 characters")
+    .isLength({min : 1, max : 16})
+    .escape(),
+    body("fullName", "Name must be english characters")
+    .isAlpha('en-US', {ignore: ' '})
+    .escape(),
     body("password", "Password must be between 5 and 20 characters")
     .trim()
     .isLength({min : 5, max : 20})
@@ -21,20 +27,27 @@ authenRoute.post("/register", [
     .isLength({min : 5, max : 20})
     .escape(),
 
+    
     async (req, res) => {
+        const {username, password, fullName} = req.body
         const errors = validationResult(req)
 
         if(!errors.isEmpty()) {
             res.render("register", {
+                fullName,
+                password,
+                username, 
                 messages : errors.array()
             })
             return
         }
 
-        const {username, password} = req.body
     
         if(await Users.findOne({username}) !== null) {
             res.render("register", {
+                fullName,
+                password,
+                username, 
                 messages : [{msg : "This username has already been used by another user!"}]
             })
             console.log("auth/signup: username has already been used by another user!")
@@ -43,6 +56,7 @@ authenRoute.post("/register", [
     
         const hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync())
         await Users.create({
+            fullName,
             username,
             password : hashedPassword
         })
@@ -54,6 +68,10 @@ authenRoute.post("/register", [
     }
 ])
 
+authenRoute.get('/login', (req, res) => {
+    res.render('login')
+})
+
 authenRoute.post("/login", async (req, res) => {
         const {username, password} = req.body
         try {
@@ -61,6 +79,8 @@ authenRoute.post("/login", async (req, res) => {
 
             if(user == null || !bcrypt.compareSync(password, user.password)) {
                 res.render("login", {
+                    password,
+                    username, 
                     messages : [{msg : "Username or passwod is wrong"}]
                 })
                 console.log("auth/login: username or passwod is wrong")

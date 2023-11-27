@@ -1,11 +1,16 @@
 extends layout
-block loginform
+block form
   h3.text-center.mb-4 Register
   form.login-form(action='/auth/register' method="post")
     .form-group
-      input.form-control.rounded-left(name='username' type='text' placeholder='Username' required='')
+      input.form-control.rounded-left(name='fullName' type='text' placeholder='Full name'
+      value=(fullName===undefine ? '' : fullName) required='')
+    .form-group
+      input.form-control.rounded-left(name='username' type='text' placeholder='Username'
+      value=(username===undefine ? '' : username) required='')
     .form-group.d-flex
-      input.form-control.rounded-left(name='password' type='password' placeholder='Password' required='')
+      input.form-control.rounded-left(name='password' type='password' placeholder='Password'
+      value=(password===undefine ? '' : password) required='')
     .form-group
       button.form-control.btn.btn-primary.rounded.submit.px-3(type='submit') Register
     .form-group.d-md-flex

@@ -33,9 +33,9 @@ app.use(authenticate) // require user login
 app.use('/user', userRoute)
 
 app.get('/', (req, res) => {
-    const {username, balance, formattedHistory} = req.user
+    const {fullName, balance, formattedHistory} = req.user
         res.render("home", {
-            username,
+            fullName,
             balance,
             history : formattedHistory
         })
