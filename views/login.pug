@@ -2,7 +2,7 @@ extends layout
 block form
   h3.text-center.mb-4 Login
   form.login-form(action='/auth/login' method="post")
-    .form-group
+    .form-group.d-flex
       input.form-control.rounded-left(name='username' type='text' placeholder='Username'
       value=(username===undefine ? '' : username) required='')
     .form-group.d-flex
@@ -10,7 +10,7 @@ block form
       value=(password===undefine ? '' : password) required='')
     .form-group
       button.form-control.btn.btn-primary.rounded.submit.px-3(type='submit') Login
-    .form-group.d-md-flex
+    .form-group.d-flex
       .w-100 
         p Don't have an account yet?
       .w-50.text-md-right

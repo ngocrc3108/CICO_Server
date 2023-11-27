@@ -2,10 +2,10 @@ extends layout
 block form
   h3.text-center.mb-4 Register
   form.login-form(action='/auth/register' method="post")
-    .form-group
+    .form-group.d-flex
       input.form-control.rounded-left(name='fullName' type='text' placeholder='Full name'
       value=(fullName===undefine ? '' : fullName) required='')
-    .form-group
+    .form-group.d-flex
       input.form-control.rounded-left(name='username' type='text' placeholder='Username'
       value=(username===undefine ? '' : username) required='')
     .form-group.d-flex
