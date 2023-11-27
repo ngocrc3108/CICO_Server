@@ -1,8 +1,16 @@
 doctype html
-html
-  head
-    title Login for me
-    style
-        include ./style.css
-  body
-    block content
+head
+  title Login
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+  style
+    include ./style.css
+section.ftco-section
+  .container
+    .row.justify-content-center
+      .col-md-7.col-lg-5
+        .login-wrap.p-4.p-md-5
+          .icon.d-flex.align-items-center.justify-content-center
+            span.fa.fa-user-o
+          block loginform

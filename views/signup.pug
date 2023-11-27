@@ -1,23 +1,14 @@
 extends layout
-
-block content
-  div.signin
-    div.center
-      h3 SIGN UP
-      if hasErrors
-        each mess in messages
-          span.err= mess
-      form(action="/auth/signup" method="post")
-          div.field
-              div.label(for="username") Username
-              input(type="text" name="username" placeholder='username')
-          div.field
-              div.label(for="password") Password
-              input(type="password" name="password" placeholder='password')
-          button.btn(type='submit') Login
-          p Already have an account? 
-            a(href='/auth/login') Login here
-      if messages
-        ul
-          for message in messages
-            li!= message.msg        
+block loginform
+  h3.text-center.mb-4 Sign Up
+  form.login-form(action='/auth/signup' method="post")
+    .form-group
+      input.form-control.rounded-left(name='username' type='text' placeholder='Username' required='')
+    .form-group.d-flex
+      input.form-control.rounded-left(name='password' type='password' placeholder='Password' required='')
+    .form-group
+      button.form-control.btn.btn-primary.rounded.submit.px-3(type='submit') sign Up
+    .form-group.d-md-flex
+      .w-50
+      .w-50.text-md-right
+        a(href='/auth/login') Login
