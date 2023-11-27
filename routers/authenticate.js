@@ -7,11 +7,11 @@ const { body, validationResult } = require("express-validator")
 
 authenRoute.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-authenRoute.get('/signup', (req, res) => {
-    res.render('signup')
+authenRoute.get('/register', (req, res) => {
+    res.render('register')
 })
 
-authenRoute.post("/signup", [
+authenRoute.post("/register", [
     body("password", "Password must be between 5 and 20 characters")
     .trim()
     .isLength({min : 5, max : 20})
@@ -25,7 +25,7 @@ authenRoute.post("/signup", [
         const errors = validationResult(req)
 
         if(!errors.isEmpty()) {
-            res.render("signup", {
+            res.render("register", {
                 messages : errors.array()
             })
             return
@@ -34,7 +34,7 @@ authenRoute.post("/signup", [
         const {username, password} = req.body
     
         if(await Users.findOne({username}) !== null) {
-            res.render("signup", {
+            res.render("register", {
                 messages : [{msg : "This username has already been used by another user!"}]
             })
             console.log("auth/signup: username has already been used by another user!")
@@ -47,7 +47,7 @@ authenRoute.post("/signup", [
             password : hashedPassword
         })
     
-        res.render("signup", {
+        res.render("register", {
             messages : [{msg : "Register successfully, login now!"}]
         })
         console.log("auth/signup: success")

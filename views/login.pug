@@ -9,10 +9,7 @@ block loginform
     .form-group
       button.form-control.btn.btn-primary.rounded.submit.px-3(type='submit') Login
     .form-group.d-md-flex
-      .w-50
+      .w-100 
+        p Don't have an account yet?
       .w-50.text-md-right
-        a(href='/auth/signup') Register
-  if messages
-    ul
-      for message in messages
-        li!= message.msg
+        a(href='/auth/register') Register

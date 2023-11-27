@@ -1,18 +1,15 @@
 extends layout
 block loginform
-  h3.text-center.mb-4 Sign Up
-  form.login-form(action='/auth/signup' method="post")
+  h3.text-center.mb-4 Register
+  form.login-form(action='/auth/register' method="post")
     .form-group
       input.form-control.rounded-left(name='username' type='text' placeholder='Username' required='')
     .form-group.d-flex
       input.form-control.rounded-left(name='password' type='password' placeholder='Password' required='')
     .form-group
-      button.form-control.btn.btn-primary.rounded.submit.px-3(type='submit') sign Up
+      button.form-control.btn.btn-primary.rounded.submit.px-3(type='submit') Register
     .form-group.d-md-flex
-      .w-50
+      .w-100
+        p Already have an account?
       .w-50.text-md-right
         a(href='/auth/login') Login
-  if messages
-    ul
-      for message in messages
-        li!= message.msg

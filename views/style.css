@@ -62,6 +62,10 @@ body {
 [tabindex="-1"]:focus {
   outline: 0 !important; }
 
+.messages ul {
+  padding-left: 0;
+}
+
 hr {
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
@@ -7940,7 +7944,7 @@ button.bg-dark:focus {
   .text-md-left {
     text-align: left !important; }
   .text-md-right {
-    text-align: right !important; }
+    text-align: right; }
   .text-md-center {
     text-align: center !important; } }
 

@@ -14,3 +14,8 @@ section.ftco-section
           .icon.d-flex.align-items-center.justify-content-center
             span.fa.fa-user-o
           block loginform
+          .messages
+            if messages
+              ul
+                for message in messages
+                  li!= message.msg
