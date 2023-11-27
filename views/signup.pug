@@ -12,3 +12,7 @@ block loginform
       .w-50
       .w-50.text-md-right
         a(href='/auth/login') Login
+  if messages
+    ul
+      for message in messages
+        li!= message.msg
