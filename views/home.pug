@@ -6,13 +6,15 @@ html
         include ./home_style.css
     body
         h1(style="text-align: center") Check-in/Check-out system
-        div
-            p Name: #{fullName}
-            p Balance: #{balance}
-        button(type="button", onclick="topUp()").btn Top up
-        div(style="float: right;")
-            form(action="/user/logout" method="get")
-                button(type='submit').btn Logout
+        div(class="container")
+            div(class="info")
+                p Name: #{fullName}
+                p Balance: #{balance}
+                button(type="button", onclick="topUp()").btn Top up
+            div(class="temp")
+            div(class="form")
+                form(action="/user/logout" method="get")
+                    button(type='submit').btn.btnlogout Logout
         table(class="HISTORY") 
             tr 
                 th ID

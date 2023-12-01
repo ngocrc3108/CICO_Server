@@ -46,8 +46,9 @@ systemRoute.get("/topup", async (req, res) => {
 })
 
 systemRoute.get("/ESP32/read", async (req, res) => {
-    const {RFID} = req.query;
-    const user = await Users.findById(RFID)
+    const {id} = req.query;
+    const user = await Users.findById(id)
+    Users.findById()
 
     if(user == null) {
         res.send("RFID is not found")
