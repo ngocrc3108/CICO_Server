@@ -5,6 +5,8 @@ const userRoute = require('./routers/user')
 const {authenRoute, authenticate} = require('./routers/authenticate')
 const systemRoute = require('./routers/system')
 const session = require('express-session')
+const adminRoute = require('./routers/admin')
+
 require('dotenv').config()
 
 // View engine setup
@@ -26,6 +28,8 @@ mongoose.connect(process.env.DATABASE_URL)
             console.log("Connect to db")
     })
     .catch((err) => console.log(err))
+
+app.use('/admin', adminRoute);
 
 app.use('/system', systemRoute)
 app.use('/auth', authenRoute)

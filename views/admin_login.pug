@@ -1,0 +1,12 @@
+extends layout
+block form
+  h3.text-center.mb-4 Login for admin
+  form.login-form(action='/admin/login' method="post")
+    .form-group.d-flex
+      input.form-control.rounded-left(name='username' type='text' placeholder='Username'
+      value=(username===undefine ? '' : username) required='')
+    .form-group.d-flex
+      input.form-control.rounded-left(name='password' type='password' placeholder='Password'
+      value=(password===undefine ? '' : password) required='')
+    .form-group
+      button.form-control.btn.btn-primary.rounded.submit.px-3(type='submit') Login

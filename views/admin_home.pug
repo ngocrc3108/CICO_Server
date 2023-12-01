@@ -1,0 +1,30 @@
+doctype html
+html
+    head
+    title Home
+    style 
+        include ./home_style.css
+    body
+        h1(style="text-align: center") Admin
+        table(class="table") 
+            tr 
+                th ID
+                th Username 
+                th Link
+            each user, index in users
+                tr
+                    th #{index + 1}
+                    th #{user.username}
+                    th 
+                        a(href=("/admin/write?id=" + user._id))
+                            button Link
+
+    script(type='text/javascript').
+        console.log("Hello world")
+        function topUp() {
+            fetch("/user/topup").then(res => res.json())
+            .then(data => {
+            const {message} = data
+            alert(message)
+            })
+        }
