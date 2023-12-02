@@ -50,7 +50,6 @@ router.post("/login", async (req, res) => {
 })
 
 router.get("/ESP32/write", async (req, res) => {
-    console.log(writeRequest)
     const {secretKey, cmd} = req.query
 
     if(secretKey != process.env.SECRET_KEY) {
