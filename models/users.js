@@ -16,9 +16,9 @@ const usersSchema = new Schema ({
         type : String,
         default : ""
     },
-    RFID : {
-        type : String,
-        default : ""
+    linked : {
+        type : Boolean,
+        default : false
     },
     balance : {
         type : Number,

@@ -51,7 +51,7 @@ systemRoute.get("/ESP32/read", async (req, res) => {
     Users.findById()
 
     if(user == null) {
-        res.send("RFID is not found")
+        res.send("cmd=deny&reason=User not found")
         console.log(`system/ESP32/read: RFID is not found`)
         return
     }

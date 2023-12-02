@@ -49,7 +49,7 @@ router.post("/login", async (req, res) => {
         }
 })
 
-router.get("/ESP32/write", (req, res) => {
+router.get("/ESP32/write", async (req, res) => {
     console.log(writeRequest)
     const {secretKey, cmd} = req.query
 
@@ -59,7 +59,7 @@ router.get("/ESP32/write", (req, res) => {
         return
     }
 
-    if(cmd == "request") {
+    if(cmd == "writeReq") {
         if(writeRequest.status == 1) {
             const {username, id} = writeRequest
             res.send(`cmd=write&username=${username}&id=${id}`)
@@ -71,8 +71,15 @@ router.get("/ESP32/write", (req, res) => {
         res.send("No request")
         return
 
-    } else if(cmd == "response") {
+    } else if(cmd == "writeRes") {
         writeRequest.status = 0; // ok
+        const {status, id} = req.query
+        if(status == "ok") {
+            const user = await User.findById(id)
+            user.linked = true;
+            await user.save();
+            console.log(`Link tag succesfully for: ${id}`)
+        }
         res.send("ok")
     }
 })
@@ -86,7 +93,7 @@ router.use("/", async (req, res, next) => {
 })
 
 router.get("/", async (req, res) => {
-    const users = await User.find({fullName : "Ngoc"})
+    const users = await User.find({linked : false})
     res.render("admin_home", {
         users : users
     });
