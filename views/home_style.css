@@ -9,6 +9,7 @@ table, th, td {
     margin-left: 3rem;
     margin-right: 3rem;
     flex-direction: column;
+    justify-content: center !important;
 }
 
 .table {
@@ -16,8 +17,6 @@ table, th, td {
     margin-right: auto;
     text-align: center;
 } 
-
-
 
 .btn{
     justify-content: center;
@@ -32,13 +31,19 @@ table, th, td {
 }
 
 .info-wrap {
-    display: inline-flex;
+    display: flex;
 }
 
 .temp {
     flex-grow: 1;
 }
 
-.form {
-    margin-right: 5%;
-}
+@media (min-width: 444px) {
+    .temp {
+    max-width: 90px; } }
+@media (min-width: 560px) {
+    .temp {
+    max-width: 100px; } }
+  @media (min-width: 620px) {
+    .temp {
+    max-width: 850px; } }

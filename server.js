@@ -38,6 +38,7 @@ app.use('/user', userRoute)
 
 app.get('/', (req, res) => {
     const {fullName, balance, formattedHistory} = req.user
+    console.log(req.user.history)
         res.render("home", {
             fullName,
             balance,
