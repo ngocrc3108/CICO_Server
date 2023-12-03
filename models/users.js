@@ -12,6 +12,14 @@ const usersSchema = new Schema ({
     password : {
         type : String
     },
+    balance : {
+        type : Number,
+        default : 0
+    },
+    history : {
+        type : Array,
+        default : []
+    },
     seasionID : {
         type : String,
         default : ""
@@ -20,14 +28,6 @@ const usersSchema = new Schema ({
         type : Boolean,
         default : false
     },
-    balance : {
-        type : Number,
-        default : 0
-    },
-    history : {
-        type : Array,
-        default : []
-    }
 }, {timestamps:true})
 
 usersSchema.virtual("formattedHistory").get(function () {
@@ -36,7 +36,11 @@ usersSchema.virtual("formattedHistory").get(function () {
         value.fee = value.fee == 0 ? "---" : value.fee 
         return value
     })
-  })
+})
+
+usersSchema.virtual("codeToGetTag").get(function () {
+    return this._id.toHexString().substring(19).toUpperCase() // last 5 character
+})
 
 const usersModel = mongoose.model('Users', usersSchema)
 

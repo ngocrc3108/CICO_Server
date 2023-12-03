@@ -37,11 +37,13 @@ app.use(authenticate) // require user login
 app.use('/user', userRoute)
 
 app.get('/', (req, res) => {
-    const {fullName, balance, formattedHistory} = req.user
+    const {fullName, balance, formattedHistory, linked, codeToGetTag} = req.user
         res.render("home", {
             fullName,
             balance,
-            history : formattedHistory
+            history : formattedHistory,
+            linked,
+            codeToGetTag
         })
     })
 

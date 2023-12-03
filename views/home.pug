@@ -11,10 +11,13 @@ html
                 div(class="info")
                     p Name: #{fullName}
                     p Balance: #{balance}
-                    button(type="button", onclick="topUp()").btn Top up
                 div(class="div-logout")
                     a(href="/user/logout")
                             button(type='submit').btn Logout
+            div(class="Topup")
+                button(type="button", onclick="topUp()").btn Top up
+                if !linked
+                    p Code to get card: #{codeToGetTag}
             table(class="table") 
                 tr 
                     th ID

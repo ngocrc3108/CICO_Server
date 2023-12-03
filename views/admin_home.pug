@@ -11,11 +11,13 @@ html
             tr 
                 th ID
                 th Username 
+                th Code
                 th Link
             each user, index in users
                 tr
                     th #{index + 1}
                     th #{user.username}
+                    th #{user.codeToGetTag}
                     th 
                         a(href=("/admin/write?id=" + user._id))
                             button Link
