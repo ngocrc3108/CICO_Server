@@ -5,17 +5,16 @@ html
     style 
         include ./home_style.css
     body
-        h1(style="text-align: center") Check-in/Check-out system
+        h1(style="text-align: center") Check-in/Check-out
         div(class="container")
             div(class="info-wrap")
                 div(class="info")
                     p Name: #{fullName}
                     p Balance: #{balance}
                     button(type="button", onclick="topUp()").btn Top up
-                div(class="temp")
-                div
+                div(class="div-logout")
                     a(href="/user/logout")
-                            button(type='submit').btn.btnlogout Logout
+                            button(type='submit').btn Logout
             table(class="table") 
                 tr 
                     th ID

@@ -4,46 +4,73 @@ table, th, td {
     padding: 3px 7px;
 }
 
+body {
+    font-size: 40px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
 .container {
     display: flex;  
     margin-left: 3rem;
     margin-right: 3rem;
     flex-direction: column;
-    justify-content: center !important;
+
 }
 
 .table {
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
 } 
 
 .btn{
+    font-size: 35px;
     justify-content: center;
     cursor: pointer;
+    padding: 15px;
     text-transform: uppercase;
-    padding: 10px;
     color: #fff;
     background: #4169E1;
     border: none;
     border-radius: 4px;
-    margin: 10px 0;
+    margin-bottom: 10px;
 }
 
 .info-wrap {
     display: flex;
+    margin-bottom: 30px;
 }
 
-.temp {
+.div-logout {
     flex-grow: 1;
 }
 
-@media (min-width: 444px) {
-    .temp {
-    max-width: 90px; } }
-@media (min-width: 560px) {
-    .temp {
-    max-width: 100px; } }
-  @media (min-width: 620px) {
-    .temp {
-    max-width: 850px; } }
+.info {
+    min-width: 500px;
+}
+
+.div-logout {
+    text-align: right;
+}
+
+.div-logout .btn {
+    margin-top: 43px;
+}
+
+@media (min-width: 1000px) {
+    .table {
+    width: 35rem; }
+    .btn {
+        font-size: 20px;
+    }
+    body {
+        font-size: 20px;
+    }
+    .btn {
+        padding: 10px;
+    }
+ }
