@@ -18,13 +18,13 @@ html
             table(class="table") 
                 tr 
                     th ID
-                    th Location 
+                    th Direction 
                     th Time
                     th Fee  
                 each value, index in history
                     tr
                         th #{index + 1}
-                        th #{value.location}
+                        th #{value.dir}
                         th #{value.time}
                         th #{value.fee}
 

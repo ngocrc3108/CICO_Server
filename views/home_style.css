@@ -17,7 +17,6 @@ h1 {
     margin-left: 3rem;
     margin-right: 3rem;
     flex-direction: column;
-
 }
 
 .table {
@@ -63,7 +62,7 @@ h1 {
 
 @media (min-width: 1000px) {
     .table {
-    width: 35rem; }
+    width: 30rem; }
     .btn {
         font-size: 20px;
     }
@@ -72,5 +71,9 @@ h1 {
     }
     .btn {
         padding: 10px;
+    }
+    .container {
+        margin-left: 7rem;
+        margin-right: 7rem;
     }
  }
