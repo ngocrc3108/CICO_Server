@@ -1,12 +1,24 @@
 table, th, td {
     border-collapse: collapse;
     border:1px solid black;
-    }
+    padding: 3px 7px;
+}
+
+.container {
+    display: flex;  
+    margin-left: 3rem;
+    margin-right: 3rem;
+    flex-direction: column;
+}
+
 .table {
-    width: 30%;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
 } 
+
+
+
 .btn{
     justify-content: center;
     cursor: pointer;
@@ -19,16 +31,8 @@ table, th, td {
     margin: 10px 0;
 }
 
-.info {
-    margin-left: 5%;
-}
-
-.container {
-    display: flex;  
-}
-
-.btnlogout {
-    margin: 50% 50%;
+.info-wrap {
+    display: inline-flex;
 }
 
 .temp {
