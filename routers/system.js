@@ -58,8 +58,10 @@ systemRoute.get("/ESP32/read", async (req, res) => {
 
     const data = {
         time : new Date(),
-        location : "Gate 1",
-        fee : 3000}
+        dir : user.history[0]?.dir == "in" ? "out" : "in",
+        fee : 0}
+
+    data.fee = data.dir == "out" ? 3000 : 0
 
     if(user.balance < data.fee) {
         res.send("cmd=deny&reason=Insufficient funds")
@@ -67,11 +69,11 @@ systemRoute.get("/ESP32/read", async (req, res) => {
         return
     }
 
-    res.send(`cmd=open&name=${user.fullName}&fee=${data.fee}`)
-    console.log(`system/ESP32/read: cmd=open&name=${user.fullName}&fee=${data.fee}`)
+    res.send(`cmd=open&name=${user.fullName}&dir=${data.dir}&fee=${data.fee}`)
+    console.log(`system/ESP32/read: cmd=open&name=${user.fullName}&dir=${data.dir}&fee=${data.fee}`)
 
-    user.history.unshift(data)
     user.balance -= data.fee
+    user.history.unshift(data)
     user.save()    
 })
 
