@@ -1,7 +1,7 @@
 table, th, td {
     border-collapse: collapse;
     border:1px solid black;
-    padding: 3px 7px;
+    padding: 5px 20px;
 }
 
 body {
@@ -62,7 +62,7 @@ h1 {
 
 @media (min-width: 1000px) {
     .table {
-    width: 30rem; }
+    width: fit-content; }
     .btn {
         font-size: 20px;
         padding: 10px;
