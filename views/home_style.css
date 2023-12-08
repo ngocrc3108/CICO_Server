@@ -4,6 +4,10 @@ table, th, td {
     padding: 5px 20px;
 }
 
+p {
+    margin: 20px 0px;
+}
+
 body {
     font-size: 40px;
 }
@@ -24,6 +28,7 @@ h1 {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    margin-top: 20px;
 } 
 
 .btn{
@@ -36,7 +41,7 @@ h1 {
     background: #4169E1;
     border: none;
     border-radius: 4px;
-    margin: 10px;
+    margin: 20px 0px;
     padding: 15px;
 }
 
@@ -57,7 +62,7 @@ h1 {
 }
 
 .div-logout .btn {
-    margin-top: 43px;
+    margin-top: 30px;
 }
 
 @media (min-width: 1000px) {
