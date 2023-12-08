@@ -32,7 +32,10 @@ const usersSchema = new Schema ({
 
 usersSchema.virtual("formattedHistory").get(function () {
     return this.history.map(value => {
-        value.time = DateTime.fromJSDate(value.time).setZone('UTC+7').toLocaleString(DateTime.DATETIME_SHORT_WITH_SECONDS)
+        value.time = DateTime.fromJSDate(value.time)
+                            .setZone('UTC+7')
+                            .toLocaleString(DateTime.DATETIME_SHORT_WITH_SECONDS, { locale: 'en-gb' })
+                            
         value.fee = value.fee == 0 ? "---" : value.fee 
         return value
     })

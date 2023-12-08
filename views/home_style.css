@@ -1,15 +1,23 @@
+body {
+    font-size: 42px;
+    background-color: #ffffff;
+}
+
 table, th, td {
     border-collapse: collapse;
-    border:1px solid black;
-    padding: 5px 20px;
+    padding: 10px 20px;
+}
+
+th {
+    background-color: #27ae60;
+}
+
+.row:nth-last-of-type(odd){
+    background-color: #e9e9e9;
 }
 
 p {
     margin: 20px 0px;
-}
-
-body {
-    font-size: 40px;
 }
 
 h1 {
@@ -29,15 +37,17 @@ h1 {
     margin-right: auto;
     text-align: center;
     margin-top: 20px;
+    box-shadow: 10px 10px 5px #d2d1d1;
 } 
 
-.btn{
+.btn {
     font-size: 35px;
     justify-content: center;
     cursor: pointer;
     height: fit-content;
     text-transform: uppercase;
     color: #fff;
+    font-weight: 700;
     background: #4169E1;
     border: none;
     border-radius: 4px;
@@ -91,4 +101,10 @@ h1 {
     flex-grow: 1;
     color: darkblue;
     font-weight: bold;
+}
+
+.row .btn {
+    margin: 3px;
+    padding: 2px 5px;
+    text-transform: none;
 }

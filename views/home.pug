@@ -18,18 +18,18 @@ html
                 button(type="button", onclick="topUp()").btn Top up
                 if !linked
                     p Code to get card: #{codeToGetTag}
-            table(class="table") 
+            table.table
                 tr 
-                    th ID
-                    th In/Out 
-                    th Time
-                    th Fee  
+                    th.th ID
+                    th.th In/Out 
+                    th.th Time
+                    th.th Fee  
                 each value, index in history
-                    tr
-                        th #{index + 1}
-                        th #{value.dir}
-                        th #{value.time}
-                        th #{value.fee}
+                        tr.row
+                            td #{index + 1}
+                            td #{value.dir}
+                            td #{value.time}
+                            td #{value.fee}
 
     script(type='text/javascript').
         console.log("Hello world")

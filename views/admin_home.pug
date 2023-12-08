@@ -14,13 +14,13 @@ html
                 th Code
                 th Link
             each user, index in users
-                tr
-                    th #{index + 1}
-                    th #{user.username}
-                    th #{user.codeToGetTag}
-                    th 
+                tr.row
+                    td #{index + 1}
+                    td #{user.username}
+                    td #{user.codeToGetTag}
+                    td 
                         a(href=("/admin/write?id=" + user._id))
-                            button Link
+                            button.btn Link
 
     script(type='text/javascript').
         console.log("Hello world")
