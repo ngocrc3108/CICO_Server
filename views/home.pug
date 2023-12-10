@@ -6,11 +6,15 @@ html
         include ./home_style.css
     body
         h1(style="text-align: center") Check-in/Check-out
-        div(class="container")
+        .container
             div(class="info-wrap")
-                div(class="info")
-                    p Name: #{fullName}
-                    p Balance: #{balance}
+                table.content 
+                    tr 
+                        th Name 
+                        td #{fullName}
+                    tr
+                        th Balance
+                        td #{balance}
                 div(class="div-logout")
                     a(href="/user/logout")
                             button(type='submit').btn Logout
@@ -30,13 +34,32 @@ html
                             td #{value.dir}
                             td #{value.time}
                             td #{value.fee}
+            .popup#popup 
+                table.content
+                    tr
+                        th Bank:
+                        td Bank for investment and Development of Vietnam (BIDV)
+                    tr
+                        th Account number:
+                        td 3149193588
+                    tr 
+                        th Account name:
+                        td Nguyen Tien Ngoc
+                    tr 
+                        th Transfer content: 
+                        td#topUpKey CICOAAAAAA
+                button(onclick="closePopUp()").btn OK
 
     script(type='text/javascript').
         console.log("Hello world")
         function topUp() {
             fetch("/user/topup").then(res => res.json())
             .then(data => {
-            const {message} = data
-            alert(message)
+            const {key} = data
+            document.getElementById("topUpKey").innerHTML  = `${key}`
+            document.getElementById("popup").style.visibility = "visible"
             })
+        }
+        function closePopUp() {
+            document.getElementById("popup").style.visibility = "hidden"
         }

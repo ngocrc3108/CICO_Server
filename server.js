@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
     const {fullName, balance, formattedHistory, linked, codeToGetTag} = req.user
         res.render("home", {
             fullName,
-            balance,
+            balance : balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "),
             history : formattedHistory,
             linked,
             codeToGetTag

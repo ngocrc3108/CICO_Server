@@ -17,7 +17,7 @@ router.get("/topup", async (req, res) => {
         userId : req.user._id,
         isOk : false
     })
-    res.send({message : `Ngân hàng: BIDV\nSTK: 3149193588\nTên: Nguyen Tien Ngoc\nNội dung: ${string}`})
+    res.send({key : string})
     console.log(`user/topup: key = ${string}`)
 })
 

@@ -19,15 +19,12 @@ html
                     td #{user.username}
                     td #{user.codeToGetTag}
                     td 
-                        a(href=("/admin/write?id=" + user._id))
-                            button.btn Link
+                        button(onclick=`link('${user._id}')`).btn Link
 
     script(type='text/javascript').
         console.log("Hello world")
-        function topUp() {
-            fetch("/user/topup").then(res => res.json())
-            .then(data => {
-            const {message} = data
-            alert(message)
-            })
+        function link(id) {
+            fetch(`/admin/write?id=${id}`)
+            .then(res => res.text())
+            .then(text => alert(text))
         }
