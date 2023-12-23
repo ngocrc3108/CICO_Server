@@ -49,9 +49,11 @@ html
                         th Transfer content: 
                         td#topUpKey CICOAAAAAA
                 button(onclick="closePopUp()").btn OK
-
+    script(src="/socket.io/socket.io.js")
     script(type='text/javascript').
-        console.log("Hello world")
+        const socket = io()
+        socket.on("test", data => console.log(data))
+        
         function topUp() {
             fetch("/user/topup").then(res => res.json())
             .then(data => {

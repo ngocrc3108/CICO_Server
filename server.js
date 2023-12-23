@@ -9,19 +9,32 @@ const adminRoute = require('./routers/admin')
 
 require('dotenv').config()
 
+// constaints
+const PORT = 3000 | process.env.PORT
+const http = app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`)
+})
+const sessionMiddleware = session({
+    secret : process.env.SECRET_KEY,
+    resave : true,
+    saveUninitialized : true,
+})
+
+const io = require("socket.io")(http)
+io.engine.use(sessionMiddleware)
+
+io.on("connection", function(socket) {
+    const sessionId = socket.request.session.id;
+    socket.join(sessionId);
+    console.log("socket connected")
+})
+
 // View engine setup
 app.set('views', './views')
 app.set("view engine", "pug")
 
 app.use(express.json())
-app.use(session({
-    secret : process.env.SECRET_KEY,
-    resave : false,
-    saveUninitialized : false,
-}))
-
-// constaints
-const PORT = 3000 | process.env.PORT
+app.use(sessionMiddleware)
 
 mongoose.connect(process.env.DATABASE_URL)
     .then(() => {
@@ -38,15 +51,11 @@ app.use('/user', userRoute)
 
 app.get('/', (req, res) => {
     const {fullName, balance, formattedHistory, linked, codeToGetTag} = req.user
-        res.render("home", {
-            fullName,
-            balance : balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "),
-            history : formattedHistory,
-            linked,
-            codeToGetTag
-        })
+    res.render("home", {
+        fullName,
+        balance : balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "),
+        history : formattedHistory,
+        linked,
+        codeToGetTag
     })
-
-app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`)
 })

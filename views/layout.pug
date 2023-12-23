@@ -6,15 +6,18 @@ head
   link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
   style
     include ./style.css
-section.ftco-section
-  .container
-    .justify-content-center
-        .login-wrap.p-4
-          .icon.d-flex.align-items-center.justify-content-center
-            span.fa.fa-user-o
-          block form
-          .messages
-            if messages
-              ul
-                for message in messages
-                  li!= message.msg
+  section.ftco-section
+    .container
+      .justify-content-center
+          .login-wrap.p-4
+            .icon.d-flex.align-items-center.justify-content-center
+              span.fa.fa-user-o
+            block form
+            .messages
+              if messages
+                ul
+                  for message in messages
+                    li!= message.msg
+  script(src="/socket.io/socket.io.js")
+  script. 
+    const socket = io()
