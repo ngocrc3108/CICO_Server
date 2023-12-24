@@ -151,3 +151,10 @@ h1 {
     padding-right: 40px;
     padding: 10px 20px 10px 0px;
 }
+
+#top-up-message {
+    text-align: center;
+    width: 100%;
+    display: table;
+    color: #27ae60;
+}

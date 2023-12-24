@@ -41,6 +41,9 @@ systemRoute.get("/topup", async (req, res) => {
 
     user.balance += Number(amount)
     user.save()
+
+    io.to(user.seasionID).emit("top-up-success", {balance : user.formattedBalance, key, amount});
+
     res.send("success")
     console.log("system/topup: success")
     topup.isOk = true

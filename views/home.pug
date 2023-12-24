@@ -48,13 +48,16 @@ html
                         td Nguyen Tien Ngoc
                     tr 
                         th Transfer content: 
-                        td#topUpKey CICOAAAAAA
+                        td#topUpKey
+                span#top-up-message
                 button(onclick="closePopUp()").btn OK
     script(src="/socket.io/socket.io.js")
     script(type='text/javascript').
         const socket = io()
         const historyBody =  document.getElementById("historyBody")
         const balanceElement = document.getElementById("balance-id")
+        const popUpElement = document.getElementById("popup")
+        const topUpMessage = document.getElementById("top-up-message")
 
         socket.on("updateTable", (payload) => {
             const {history, balance} = payload
@@ -67,14 +70,24 @@ html
             balanceElement.innerHTML = balance
         })
 
+        socket.on("top-up-success", (payload) => {
+            const {balance, key, amount} = payload
+
+            balanceElement.innerHTML = balance
+
+            if(popUpElement.style.visibility == "visible")
+                topUpMessage.innerHTML = `Top up successfully, amount = ${amount}`
+        })
+
         function topUp() {
             fetch("/user/topup").then(res => res.json())
             .then(data => {
             const {key} = data
             document.getElementById("topUpKey").innerHTML  = `${key}`
-            document.getElementById("popup").style.visibility = "visible"
+            popUpElement.style.visibility = "visible"
             })
         }
         function closePopUp() {
-            document.getElementById("popup").style.visibility = "hidden"
+            popUpElement.style.visibility = "hidden"
+            topUpMessage.innerHTML = ""
         }
