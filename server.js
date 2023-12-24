@@ -20,7 +20,7 @@ const sessionMiddleware = session({
     saveUninitialized : true,
 })
 
-const io = require("socket.io")(http)
+global.io = require("socket.io")(http)
 io.engine.use(sessionMiddleware)
 
 io.on("connection", function(socket) {
@@ -29,21 +29,22 @@ io.on("connection", function(socket) {
     console.log("socket connected")
 })
 
-// View engine setup
-app.set('views', './views')
-app.set("view engine", "pug")
-
-app.use(express.json())
-app.use(sessionMiddleware)
-
 mongoose.connect(process.env.DATABASE_URL)
     .then(() => {
             console.log("Connect to db")
     })
     .catch((err) => console.log(err))
 
-app.use('/admin', adminRoute);
+// View engine setup
+app.set('views', './views')
+app.set("view engine", "pug")
 
+// middleware
+app.use(express.json())
+app.use(sessionMiddleware)
+
+// routers
+app.use('/admin', adminRoute);
 app.use('/system', systemRoute)
 app.use('/auth', authenRoute)
 app.use(authenticate) // require user login 

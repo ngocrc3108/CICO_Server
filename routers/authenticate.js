@@ -90,7 +90,6 @@ authenRoute.post("/login", async (req, res) => {
             req.session.loggedIn = true;
             console.log("auth/login: success")
             user.seasionID = req.sessionID
-            console.log(req.sessionID)
             await user.save()
             res.redirect('/')
         } catch (err) {

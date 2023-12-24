@@ -3,6 +3,8 @@ const Users = require('../models/users')
 const Topup = require('../models/topup')
 require('dotenv').config()
 const systemRoute = Router()
+const { DateTime } = require("luxon")
+// const io = require('../server')
 
 systemRoute.use('/', (req, res, next) => {
     const {secretKey} = req.query
@@ -75,6 +77,17 @@ systemRoute.get("/ESP32/read", async (req, res) => {
     user.balance -= data.fee
     user.history.unshift(data)
     user.save()    
+    updateTable(data, user.seasionID)
 })
+
+const updateTable = (data, sessionID) => {
+    data.time = DateTime.fromJSDate(data.time)
+    .setZone('UTC+7')
+    .toLocaleString(DateTime.DATETIME_SHORT_WITH_SECONDS, { locale: 'en-gb' })
+    
+    data.fee = data.fee == 0 ? "---" : data.fee     
+
+    io.to(sessionID).emit("updateTable", data);
+}
 
 module.exports = systemRoute

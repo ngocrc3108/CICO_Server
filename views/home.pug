@@ -23,17 +23,18 @@ html
                 if !linked
                     p Code to get card: #{codeToGetTag}
             table.table
-                tr 
-                    th.th ID
+                thead 
+                    // th.th ID
                     th.th In/Out 
                     th.th Time
-                    th.th Fee  
-                each value, index in history
-                        tr.row
-                            td #{index + 1}
-                            td #{value.dir}
-                            td #{value.time}
-                            td #{value.fee}
+                    th.th Fee
+                tbody#historyBody
+                    each value, index in history
+                            tr.row
+                                // td #{index + 1}
+                                td #{value.dir}
+                                td #{value.time}
+                                td #{value.fee}
             .popup#popup 
                 table.content
                     tr
@@ -52,8 +53,16 @@ html
     script(src="/socket.io/socket.io.js")
     script(type='text/javascript').
         const socket = io()
-        socket.on("test", data => console.log(data))
-        
+        const historyBody =  document.getElementById("historyBody")
+
+        socket.on("updateTable", (data) => {
+            historyBody.innerHTML = `<tr class="row">
+                                        <td> ${data.dir} </td>
+                                        <td> ${data.time} </td>
+                                        <td> ${data.fee} </td>
+                                    </tr>` + historyBody.innerHTML
+        })
+
         function topUp() {
             fetch("/user/topup").then(res => res.json())
             .then(data => {
