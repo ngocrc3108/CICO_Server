@@ -1,11 +1,11 @@
 doctype html
 html
     head
-    title Home
-    style 
-        include ./home_style.css
+        title Home
+        style 
+            include ./home_style.css
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
     body
-        h1(style="text-align: center") Check-in/Check-out
         .container
             div(class="info-wrap")
                 table.content 
@@ -15,13 +15,15 @@ html
                     tr
                         th Balance
                         td#balance-id #{balance}
-                div(class="div-logout")
-                    a(href="/user/logout")
-                            button(type='submit').btn Logout
+                
+
             div(class="Topup")
                 button(type="button", onclick="topUp()").btn Top up
                 if !linked
                     p Code to get card: #{codeToGetTag}
+                div(class="div-logout")
+                    a(href="/user/logout")
+                        button(type='submit').btn Logout
             table.table
                 thead 
                     // th.th ID

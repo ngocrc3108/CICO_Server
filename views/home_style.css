@@ -1,5 +1,5 @@
 body {
-    font-size: 42px;
+    font-size: 20px;
     background-color: #ffffff;
 }
 
@@ -9,11 +9,12 @@ table, th, td {
 
 .table th {
     background-color: #27ae60;
-    padding: 10px 20px;
+    padding: 10px 3px;
 }
 
 .table td {
-    padding: 10px 20px;
+    padding: 10px 3px;
+    font-size: 18px;
 }
 
 .row:nth-last-of-type(odd){
@@ -24,28 +25,24 @@ p {
     margin: 20px 0px;
 }
 
-h1 {
-    margin-bottom: 0px;
-}
-
 .container {
     display: flex;  
-    margin-left: 3rem;
-    margin-right: 3rem;
+    margin-left: 10px;
+    margin-right: 10px;
     flex-direction: column;
 }
 
 .table {
     width: 100%;
+    text-align: center;
     margin-left: auto;
     margin-right: auto;
-    text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
     box-shadow: 10px 10px 5px #d2d1d1;
 } 
 
 .btn {
-    font-size: 35px;
+    font-size: 17px;
     justify-content: center;
     cursor: pointer;
     height: fit-content;
@@ -56,44 +53,24 @@ h1 {
     border: none;
     border-radius: 4px;
     margin: 10px 0px;
-    padding: 15px;
+    padding: 7px;
 }
 
 .info-wrap {
     display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    width: fit-content;
 }
 
 .div-logout {
     flex-grow: 1;
 }
 
-.info {
-    min-width: 500px;
-}
-
 .div-logout {
     text-align: right;
 }
 
-.div-logout .btn {
-    margin-top: 30px;
-}
-
-@media (min-width: 1000px) {
-    .table {
-    width: fit-content; }
-    .btn {
-        font-size: 20px;
-        padding: 10px;
-    }
-    body {
-        font-size: 20px;
-    }
-    .container {
-        margin-left: 7rem;
-        margin-right: 7rem;
-    }
-}
 
 .Topup {
     display: flex;  
@@ -114,7 +91,7 @@ h1 {
 }
 
 .popup {
-    min-width: 730px;
+    width: 80%;
     text-align: left;
     border-radius: 10px;
     background: #d2d3d7;
@@ -138,23 +115,42 @@ h1 {
 }
 
 .content {
-    padding: 0 0 px 0;
     text-align: left;
 }
 
-.content td {
-    font-weight: 1000;
-    padding: 10px 20px 10px 0px;
+.content th {
+    padding: 7px;
 }
 
 .content th {
-    padding-right: 40px;
-    padding: 10px 20px 10px 0px;
+    padding: 7px;
+    padding-right: 25px;
 }
 
 #top-up-message {
     text-align: center;
-    width: 100%;
     display: table;
     color: #27ae60;
+}
+
+@media (min-width: 500px) {
+    .table {
+    width: fit-content;
+    }
+    .table th {
+        padding: 10px 20px;
+        font-size: 20px;
+    }
+    .table td {
+        padding: 10px 20px;
+        font-size: 20px;
+    }
+
+    .container {
+        margin: 0px 10%;
+    }
+    .popup {
+        width: fit-content;
+        min-width: 400px;
+    }
 }
