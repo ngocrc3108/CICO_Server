@@ -79,8 +79,7 @@ systemRoute.get("/ESP32/read", async (req, res) => {
 
     user.balance -= data.fee
     user.history.unshift(data)
-    console.log(user.history)
-    user.save()    
+    await user.save()    
 
     updateTable(user.formattedHistory[0], user.formattedBalance, user.seasionID)
 })
