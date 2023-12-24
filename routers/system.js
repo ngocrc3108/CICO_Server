@@ -76,18 +76,14 @@ systemRoute.get("/ESP32/read", async (req, res) => {
 
     user.balance -= data.fee
     user.history.unshift(data)
+    console.log(user.history)
     user.save()    
-    updateTable(data, user.seasionID)
+
+    updateTable(user.formattedHistory[0], user.formattedBalance, user.seasionID)
 })
 
-const updateTable = (data, sessionID) => {
-    data.time = DateTime.fromJSDate(data.time)
-    .setZone('UTC+7')
-    .toLocaleString(DateTime.DATETIME_SHORT_WITH_SECONDS, { locale: 'en-gb' })
-    
-    data.fee = data.fee == 0 ? "---" : data.fee     
-
-    io.to(sessionID).emit("updateTable", data);
+const updateTable = (history, balance, sessionID) => {
+    io.to(sessionID).emit("updateTable", {history, balance});
 }
 
 module.exports = systemRoute

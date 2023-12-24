@@ -14,7 +14,7 @@ html
                         td #{fullName}
                     tr
                         th Balance
-                        td #{balance}
+                        td#balance-id #{balance}
                 div(class="div-logout")
                     a(href="/user/logout")
                             button(type='submit').btn Logout
@@ -54,13 +54,17 @@ html
     script(type='text/javascript').
         const socket = io()
         const historyBody =  document.getElementById("historyBody")
+        const balanceElement = document.getElementById("balance-id")
 
-        socket.on("updateTable", (data) => {
+        socket.on("updateTable", (payload) => {
+            const {history, balance} = payload
             historyBody.innerHTML = `<tr class="row">
-                                        <td> ${data.dir} </td>
-                                        <td> ${data.time} </td>
-                                        <td> ${data.fee} </td>
+                                        <td> ${history.dir} </td>
+                                        <td> ${history.time} </td>
+                                        <td> ${history.fee} </td>
                                     </tr>` + historyBody.innerHTML
+
+            balanceElement.innerHTML = balance
         })
 
         function topUp() {

@@ -51,10 +51,10 @@ app.use(authenticate) // require user login
 app.use('/user', userRoute)
 
 app.get('/', (req, res) => {
-    const {fullName, balance, formattedHistory, linked, codeToGetTag} = req.user
+    const {fullName, formattedBalance, formattedHistory, linked, codeToGetTag} = req.user
     res.render("home", {
         fullName,
-        balance : balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "),
+        balance : formattedBalance,
         history : formattedHistory,
         linked,
         codeToGetTag

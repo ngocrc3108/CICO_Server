@@ -41,6 +41,10 @@ usersSchema.virtual("formattedHistory").get(function () {
     })
 })
 
+usersSchema.virtual("formattedBalance").get(function () {
+    return this.balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+})
+
 usersSchema.virtual("codeToGetTag").get(function () {
     return this._id.toHexString().substring(19).toUpperCase() // last 5 character
 })
