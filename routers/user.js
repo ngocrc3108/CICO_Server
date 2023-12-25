@@ -28,4 +28,11 @@ router.get('/logout', async (req, res) => {
     res.redirect('/')
 })
 
+router.get("/delete/history", (req, res) => {
+    const user = req.user
+    user.history = []
+    user.save()
+    res.send("delete ok")
+})
+
 module.exports = router
