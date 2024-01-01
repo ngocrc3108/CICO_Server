@@ -7,7 +7,7 @@ html
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
     body
         .container
-            div(class="info-wrap")
+            div.info-wrap
                 table.content 
                     tr 
                         th Name 
@@ -20,7 +20,7 @@ html
             div(class="Topup")
                 button(type="button", onclick="topUp()").btn Top up
                 if !linked
-                    p Code to get card: #{codeToGetTag}
+                    p temp code: #{codeToGetTag}
                 div(class="div-logout")
                     a(href="/user/logout")
                         button(type='submit').btn Logout

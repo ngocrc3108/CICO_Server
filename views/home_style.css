@@ -59,8 +59,21 @@ p {
 .info-wrap {
     display: flex;
     flex-direction: column;
-    padding-top: 20px;
     width: fit-content;
+    box-shadow: 5px 5px 5px #f1f0f0;
+    padding: 10px 10px 10px 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.info-wrap th {
+    color: #b1b8b3;
+
+}
+
+.info-wrap td {
+    color: #308754;
 }
 
 .div-logout {
@@ -118,7 +131,7 @@ p {
     text-align: left;
 }
 
-.content th {
+.content td {
     padding: 7px;
 }
 
@@ -126,6 +139,8 @@ p {
     padding: 7px;
     padding-right: 25px;
 }
+
+
 
 #top-up-message {
     text-align: center;
